@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Memory Flip Game</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <h1>🎮 Memory Flip Game</h1>
+    
+    <!-- Theme Selection -->
+    <div class="theme-select">
+      <label>Choose Theme: </label>
+      <select id="themeChooser">
+        <option value="fruits">🍎 Fruits</option>
+        <option value="animals">🐼 Animals</option>
+        <option value="flowers">🌸 Flowers</option>
+      </select>
+      <button id="startBtn" class="btn">Start Game</button>
+    </div>
+
+    <!-- Scoreboard -->
+    <div class="stats">
+      <div>Moves: <span id="moves">0</span></div>
+      <div>Time: <span id="time">0s</span></div>
+      <div>Matches: <span id="matches">0</span></div>
+      <div>High Score: <span id="highScore">0</span></div>
+    </div>
+    <button id="resetBtn" class="btn">Restart</button>
+    <button id="leaderboardBtn" class="btn">🏆 Leaderboard</button>
+  </header>
+
+  <main>
+    <section id="gameBoard" class="game-board"></section>
+  </main>
+
+  <!-- Leaderboard Modal -->
+  <div id="leaderboardModal" class="modal">
+    <div class="modal-content">
+      <h2>Leaderboard</h2>
+      <ul id="leaderboardList"></ul>
+      <input type="text" id="playerName" placeholder="Enter your name" />
+      <button id="saveScoreBtn" class="btn">Save Score</button>
+      <button id="closeLeaderboard" class="btn">Close</button>
+    </div>
+  </div>
+
+  <!-- Congratulations Popup -->
+  <div id="congrats" class="congrats hidden">
+    🎉 Congratulations! You Won! 🎉
+  </div>
+
+  <!-- Confetti -->
+  <canvas id="confettiCanvas"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>

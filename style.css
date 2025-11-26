@@ -1,0 +1,169 @@
+:root {
+  --bg: #2f3e46;
+  --card-back: #354f52;
+  --card-front: #cad2c5;
+  --accent: #ff6b6b;
+  --accent-light: #f06595;
+  --text: #edf2f4;
+  --radius: 12px;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.header {
+  text-align: center;
+  padding: 2rem 1rem; /* more space around header */
+}
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem; /* wider gaps */
+  justify-content: center;
+  margin: 1rem 0;
+}
+.theme-select {
+  margin: 1rem 0;
+}
+select {
+  padding: 0.6rem;
+  border-radius: var(--radius);
+  border: none;
+}
+
+.btn {
+  padding: 0.8rem 1.2rem;
+  margin: 0.5rem;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn:hover {
+  background: var(--accent-light);
+}
+
+/* Game Board 5x5 */
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 25px;       /* increased gap between cards */
+  padding: 40px;   /* more breathing room inside */
+  width: 90%;
+  max-width: 800px; /* board wider on desktop */
+  margin: 3rem auto; /* more margin top & bottom */
+}
+
+.card {
+  perspective: 1000px;
+  cursor: pointer;
+}
+.card-inner {
+  position: relative;
+  width: 100%;
+  padding-top: 100%; /* Square */
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem; /* slightly bigger emojis */
+  border-radius: var(--radius);
+  backface-visibility: hidden;
+}
+.card-back {
+  background: var(--card-back);
+}
+.card-front {
+  background: var(--card-front);
+  transform: rotateY(180deg);
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: var(--card-back);
+  padding: 2rem;
+  border-radius: var(--radius);
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+}
+.modal-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+.modal-content li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--accent);
+}
+
+/* Congratulations */
+.congrats {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--accent);
+  color: #fff;
+  padding: 1.5rem 2.5rem;
+  border-radius: var(--radius);
+  font-size: 1.5rem;
+  z-index: 100;
+  animation: pop 0.8s ease;
+}
+.hidden {
+  display: none;
+}
+
+@keyframes pop {
+  0% { transform: translateX(-50%) scale(0.5); opacity: 0; }
+  50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+  100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+#confettiCanvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 200;
+}
+
+/* 📱 Mobile tweaks */
+@media (max-width: 600px) {
+  .game-board {
+    gap: 15px;      /* still spaced nicely on mobile */
+    padding: 20px;
+  }
+  .card-front,
+  .card-back {
+    font-size: 1.4rem;
+  }
+}
